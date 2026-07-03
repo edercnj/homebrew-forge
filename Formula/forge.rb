@@ -5,23 +5,23 @@
 class Forge < Formula
   desc "Local-first orchestration runtime for governed AI-assisted delivery"
   homepage "https://github.com/edercnj/forge"
-  version "0.1.0"
+  version "0.1.1"
 
   on_macos do
     # Apple Silicon only; Intel (x86_64) macOS is not supported yet.
     on_arm do
-      url "https://github.com/edercnj/forge/releases/download/v0.1.0/forge-0.1.0-darwin-arm64.tar.gz"
-      sha256 "a99ed2b8342e4b2c87a6e5ef119916ffd12f48f35c18d9d903bc7949b2aca053"
+      url "https://github.com/edercnj/forge/releases/download/v0.1.1/forge-0.1.1-darwin-arm64.tar.gz"
+      sha256 "aa8b824f87eadcecfb2afae609e858d9b9af6eb0ecc7dfc1fd5668a55438079e"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/edercnj/forge/releases/download/v0.1.0/forge-0.1.0-linux-arm64.tar.gz"
-      sha256 "02e21e6a008181135bfbca95f405c5332de6ff0794ab9eb0c38fdd6a4cee0500"
+      url "https://github.com/edercnj/forge/releases/download/v0.1.1/forge-0.1.1-linux-arm64.tar.gz"
+      sha256 "548184cdb2599b5bd65648bb550c041b2717710a2c21ff1148415740ba8aa54a"
     else
-      url "https://github.com/edercnj/forge/releases/download/v0.1.0/forge-0.1.0-linux-x64.tar.gz"
-      sha256 "53bc4d45ceb54b91b23adc25feb805e9d03c85e70bc10de5074e087bab443faf"
+      url "https://github.com/edercnj/forge/releases/download/v0.1.1/forge-0.1.1-linux-x64.tar.gz"
+      sha256 "b3a13fb7dc771212f7fc8d54aa292ffb7430f3a2bac974cd747a92d0aa8acb88"
     end
   end
 

@@ -1,26 +1,30 @@
-# Generated with JReleaser 1.25.0 at 2026-07-09T19:34:13.820223808Z
+# Generated with JReleaser 1.25.0 at 2026-07-09T19:57:56.449861487Z
 #
 # Fórmula multi-plataforma do tap edercnj/homebrew-forge (execution/37 §C2, ADR-0052).
 # Gerada pelo JReleaser a partir de jreleaser.yml — NUNCA edite a fórmula renderizada
 # no tap à mão; ajuste este template. Baseada no template native-image/brew do
 # JReleaser, customizada para: (a) o layout do nosso tarball/zip (executável `forge`
 # na raiz, não `bin/forge`); (b) os caveats da Nerd Font.
+#
+# NÃO usar `depends_on cask:` — o Homebrew não permite que uma *formula* dependa de um
+# *cask* (erro "Unsupported special dependency: :cask" no `brew install`). A Nerd Font
+# é instruída nos caveats, não como dependência.
 class Forge < Formula
   desc "Local-first orchestration runtime for governed AI-assisted delivery"
   homepage "https://github.com/edercnj/forge"
-  version "0.2.1"
+  version "0.2.2"
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "https://github.com/edercnj/forge/releases/download/v0.2.1/forge-0.2.1-linux-arm64.zip"
-    sha256 "9741807caef46b864cafb5c194cf64f55419390b4d3be7415ab91ee43b95fb80"
+    url "https://github.com/edercnj/forge/releases/download/v0.2.2/forge-0.2.2-linux-arm64.zip"
+    sha256 "6fb9dca410cec9ba8b79e4b9e1322f6529f953c9a5ba8eabaccbfcc800c6cdde"
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/edercnj/forge/releases/download/v0.2.1/forge-0.2.1-linux-x64.zip"
-    sha256 "c1221fc61210bbcd5ac92513e50125eb99d6f23b6909687791a2ac145f0122de"
+    url "https://github.com/edercnj/forge/releases/download/v0.2.2/forge-0.2.2-linux-x64.zip"
+    sha256 "44f670ed05ca00297aa62db32e5ffb71aa88a2b9f26b72b8f90022f00a148550"
   end
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/edercnj/forge/releases/download/v0.2.1/forge-0.2.1-darwin-arm64.zip"
-    sha256 "72ec2a0cceb7fc703cd0cf2c983205cb007421dd8dab370a6af67ee9c656acba"
+    url "https://github.com/edercnj/forge/releases/download/v0.2.2/forge-0.2.2-darwin-arm64.zip"
+    sha256 "bfad1cc9a68f5f554b4960596288ae79dcc4b81650ba962313000ffc55781936"
   end
 
   def install

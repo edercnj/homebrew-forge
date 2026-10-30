@@ -1,48 +1,36 @@
-# Generated with JReleaser 1.25.0 at 2026-07-09T19:57:56.449861487Z
+# Generated with JReleaser 1.25.0 at 2026-10-30T04:30:00.49815386Z
 #
 # Fórmula multi-plataforma do tap edercnj/homebrew-forge (execution/37 §C2, ADR-0052).
 # Gerada pelo JReleaser a partir de jreleaser.yml — NUNCA edite a fórmula renderizada
 # no tap à mão; ajuste este template. Baseada no template native-image/brew do
-# JReleaser, customizada para: (a) o layout do nosso tarball/zip (executável `forge`
-# na raiz, não `bin/forge`); (b) os caveats da Nerd Font.
-#
-# NÃO usar `depends_on cask:` — o Homebrew não permite que uma *formula* dependa de um
-# *cask* (erro "Unsupported special dependency: :cask" no `brew install`). A Nerd Font
-# é instruída nos caveats, não como dependência.
+# JReleaser. O ZIP traz launcher, native-image e corpus na raiz; a formula preserva o
+# layout que o launcher espera depois da instalacao: bin/{forge,forge-native} + assets/.
 class Forge < Formula
   desc "Local-first orchestration runtime for governed AI-assisted delivery"
   homepage "https://github.com/edercnj/forge"
-  version "0.2.2"
+  version "1.0.0"
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-    url "https://github.com/edercnj/forge/releases/download/v0.2.2/forge-0.2.2-linux-arm64.zip"
-    sha256 "6fb9dca410cec9ba8b79e4b9e1322f6529f953c9a5ba8eabaccbfcc800c6cdde"
+    url "https://github.com/edercnj/forge/releases/download/v1.0.0/forge-1.0.0-linux-arm64.zip"
+    sha256 "85e6b2c75af21068080611736edf4fce094b5bcaeab989a01512be02efaa46ec"
   end
   if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/edercnj/forge/releases/download/v0.2.2/forge-0.2.2-linux-x64.zip"
-    sha256 "44f670ed05ca00297aa62db32e5ffb71aa88a2b9f26b72b8f90022f00a148550"
+    url "https://github.com/edercnj/forge/releases/download/v1.0.0/forge-1.0.0-linux-x64.zip"
+    sha256 "90b7f2fc662abc6c4ce03df13781cf8cc432545bb41fba6739a067522eeaeeac"
   end
   if OS.mac? && Hardware::CPU.arm?
-    url "https://github.com/edercnj/forge/releases/download/v0.2.2/forge-0.2.2-darwin-arm64.zip"
-    sha256 "bfad1cc9a68f5f554b4960596288ae79dcc4b81650ba962313000ffc55781936"
+    url "https://github.com/edercnj/forge/releases/download/v1.0.0/forge-1.0.0-darwin-arm64.zip"
+    sha256 "e0edb80ef9c6441c99d2d796a5f5a14f9dd4597eed4b4e49ade1d48378947109"
   end
 
   def install
-    bin.install "forge"
-  end
-
-  def caveats
-    <<~EOS
-      A TUI do forge (forge tui) usa ícones Nerd Font. Um app de terminal não instala
-      fontes; para os ícones renderizarem, instale uma Nerd Font (uma vez):
-        brew install --cask font-symbols-only-nerd-font    # leve, só símbolos (via fallback)
-      Para o visual pleno estilo OpenCode, use a Geist Mono completa e selecione-a no terminal:
-        brew install --cask font-geist-mono-nerd-font
-        iTerm2: Settings → Profiles → Text → Font → "GeistMono Nerd Font Mono"
-    EOS
+    bin.install "forge", "forge-native"
+    prefix.install "assets"
+    prefix.install "manual"
   end
 
   test do
     system "#{bin}/forge", "--version"
+    system "#{bin}/forge", "show", "manual", "--output", "json"
   end
 end
